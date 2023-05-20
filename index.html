@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcador baseball</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .scoreboard th,
+      .scoreboard td {
+        padding: 1rem;
+        border-width: 1px;
+        border-color: inherit;
+      }
+    </style>
+</head>
+<body class="p-5">
+  <h1 class="font-bold text-2xl leading-10">Marcador del juego</h1>
+
+  <div class="my-5">
+    <label for="home" class="block font-bold text-lg">Casa</label>
+
+    <input type="text" name="home" id="home" class="text-2xl border rounded-md p-3 read-only:outline-none">
+    <span id="home-total-score" class="font-bold text-4xl mx-4">0</span>
+  </div>
+
+  <div class="my-5">
+    <label for="visitor" class="block font-bold text-lg">Visitante</label>
+    <input type="text" name="visitor" id="visitor" class="text-2xl border rounded-md p-3 read-only:outline-none">
+    <span id="visitor-total-score" class="font-bold text-4xl mx-4">0</span>
+  </div>
+
+  <div>
+    <button type="button" id="startGame" onclick="playBall()" class="border border-black rounded-md text-2xl p-3 inline-block hover:cursor-pointer disabled:border-gray-300 disabled:text-gray-300 hover:disabled:cursor-default">¡Play ball!</button>
+  </div>
+
+  <div class="my-5">
+    <div class="grid grid-cols-2 w-14 gap-1 rotate-45 mb-4">
+      <div id="second-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+      <div id="first-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+      <div id="third-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+      <div></div>
+    </div>
+
+    <div class="flex gap-2 items-center">
+      <span class="w-0 h-0 
+      border-l-[10px] border-l-transparent
+      border-b-[15px] border-b-red-500
+      border-r-[10px] border-r-transparent"></span>
+      <span class="w-0 h-0 
+      border-l-[10px] border-l-transparent
+      border-t-[15px] border-t-red-500
+      border-r-[10px] border-r-transparent"></span>
+      <span class="text-lg">1</span>
+    </div>
+  </div>
+
+  <div class="my-5 rounded-md overflow-hidden inline-block border border-black">
+    <table class="scoreboard border border-black">
+      <thead>
+        <tr>
+          <th></th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+          <th>8</th>
+          <th>9</th>
+        </tr>
+      </thead>
+        
+      <tbody>
+        <tr>
+          <td id="home-scoreboard-name" class="font-bold text-lg"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td id="visitor-scoreboard-name" class="font-bold text-lg"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+
+    const homeName = document.getElementById("home");
+    const visitorName = document.getElementById("visitor");
+
+    const homeTotalScore = document.getElementById("home-total-score");
+    const visitorTotalScore = document.getElementById("visitor-total-score");
+
+    function playBall() {
+      localStorage.setItem("home", homeName.value);
+      localStorage.setItem("visitor", visitorName.value);
+
+      homeName.readOnly = true;
+      homeName.ariaReadOnly = true;
+
+      visitorName.readOnly = true;
+      visitorName.ariaReadOnly = true;
+
+      document.getElementById("startGame").disabled = true;
+
+      initScoreboard(homeName.value, visitorName.value);
+    }
+
+    function initScoreboard(homeName, visitorName) {
+      const homescoreboardScoreboardName = document.getElementById("home-scoreboard-name");
+      const visitorScoreboardName = document.getElementById("visitor-scoreboard-name");
+
+      homescoreboardScoreboardName.innerHTML = homeName;
+      visitorScoreboardName.innerHTML = visitorName;
+    }
+
+    window.onload = function() {
+      const homeNameStorage = localStorage.getItem("home");
+      const visitorNameStorage = localStorage.getItem("visitor");
+
+      homeName.value = homeNameStorage;
+      visitorName.value = visitorNameStorage;
+    }
+  </script>
+</body>
+</html>
