@@ -21,21 +21,30 @@
   <div class="my-5">
     <label for="home" class="block font-bold text-lg">Casa</label>
 
-    <input type="text" name="home" id="home" class="text-2xl border rounded-md p-3 read-only:outline-none">
-    <span id="home-total-score" class="font-bold text-4xl mx-4">0</span>
+    <div class="flex items-center">
+      <input type="text" name="home" id="home" class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
+      <span id="home-total-score" class="font-bold text-4xl mx-4">
+        <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
+      </span>
+    </div>
   </div>
 
   <div class="my-5">
     <label for="visitor" class="block font-bold text-lg">Visitante</label>
-    <input type="text" name="visitor" id="visitor" class="text-2xl border rounded-md p-3 read-only:outline-none">
-    <span id="visitor-total-score" class="font-bold text-4xl mx-4">0</span>
+
+    <div class="flex items-center">
+      <input type="text" name="visitor" id="visitor" class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
+      <span id="visitor-total-score" class="font-bold text-4xl mx-4">
+        <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
+      </span>
+    </div>
   </div>
 
   <div>
     <button type="button" id="startGame" onclick="playBall()" class="border border-black rounded-md text-2xl p-3 inline-block hover:cursor-pointer disabled:border-gray-300 disabled:text-gray-300 hover:disabled:cursor-default">¡Play ball!</button>
   </div>
 
-  <div class="my-5">
+  <div class="my-5 hidden">
     <div class="grid grid-cols-2 w-14 gap-1 rotate-45 mb-4">
       <div id="second-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
       <div id="first-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
@@ -56,7 +65,7 @@
     </div>
   </div>
 
-  <div class="my-5 rounded-md overflow-hidden inline-block border border-black">
+  <div id="scoreboard" class="hidden my-5 rounded-md overflow-hidden inline-block border border-black">
     <table class="scoreboard border border-black">
       <thead>
         <tr>
@@ -102,6 +111,8 @@
     </table>
   </div>
 
+  <script src="./team.js"></script>
+  <script src="./index.js"></script>
   <script>
 
     const homeName = document.getElementById("home");
@@ -109,6 +120,9 @@
 
     const homeTotalScore = document.getElementById("home-total-score");
     const visitorTotalScore = document.getElementById("visitor-total-score");
+
+    let homeScore = 0;
+    let visitorScore = 0;
 
     function playBall() {
       localStorage.setItem("home", homeName.value);
@@ -131,6 +145,8 @@
 
       homescoreboardScoreboardName.innerHTML = homeName;
       visitorScoreboardName.innerHTML = visitorName;
+
+      document.getElementById("scoreboard").classList.remove('hidden');
     }
 
     window.onload = function() {
@@ -139,6 +155,15 @@
 
       homeName.value = homeNameStorage;
       visitorName.value = visitorNameStorage;
+
+      const recoverScoreHome = localStorage.getItem("home-score");
+      const recoverScoreVisitor = localStorage.getItem("visitor-score");
+
+      homeScore = recoverScoreHome;
+      visitorScore = recoverScoreVisitor;
+
+      homeTotalScore.innerHTML = homeScore ?? 0;
+      visitorTotalScore.innerHTML = visitorScore ?? 0;
     }
   </script>
 </body>

@@ -1,7 +1,10 @@
 class Team {
-  constructor(name, wins, losses) {
+  constructor(name, score) {
     this.name = name;
-    this.wins = wins;
-    this.losses = losses;
+    this.score = score;
+  }
+
+  add() {
+    this.score++;
   }
 }
