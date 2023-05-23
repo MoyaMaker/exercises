@@ -1,67 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcador baseball</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      .scoreboard th,
-      .scoreboard td {
-        padding: 1rem;
-        border-width: 1px;
-        border-color: inherit;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcador baseball</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .scoreboard th,
+    .scoreboard td {
+      padding: 1rem;
+      border-width: 1px;
+      border-color: inherit;
+    }
+  </style>
 </head>
+
 <body class="p-5">
   <h1 class="font-bold text-2xl leading-10">Marcador del juego</h1>
 
-  <div class="my-5">
-    <label for="home" class="block font-bold text-lg">Casa</label>
+  <div class="grid grid-cols-2 items-center">
+    <div class="flex flex-col">
+      <div class="my-5">
+        <label for="home" class="block font-bold text-lg">Casa</label>
 
-    <div class="flex items-center">
-      <input type="text" name="home" id="home" class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
-      <span id="home-total-score" class="font-bold text-4xl mx-4">
-        <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
-      </span>
+        <div class="flex items-center">
+          <input type="text" name="home" id="home"
+            class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
+          <span id="home-total-score" class="font-bold text-4xl mx-4">
+            <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
+          </span>
+        </div>
+
+        <div class="mt-4">
+          <button type="button" class="p-3 rounded-md font-bold bg-green-500 text-white"
+            onclick="addHome()">Sumar</button>
+          <button type="button" class="p-3 rounded-md font-bold bg-red-500 text-white"
+            onclick="removeHome()">Restar</button>
+          <button type="button" class="p-3 rounded-md font-bold bg-gray-500 text-white"
+            onclick="resetHome()">Reiniciar</button>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <label for="visitor" class="block font-bold text-lg">Visitante</label>
+
+        <div class="flex items-center">
+          <input type="text" name="visitor" id="visitor"
+            class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
+          <span id="visitor-total-score" class="font-bold text-4xl mx-4">
+            <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
+          </span>
+        </div>
+
+        <div class="mt-4">
+          <button type="button" class="p-3 rounded-md font-bold bg-green-500 text-white"
+            onclick="addVisitor()">Sumar</button>
+          <button type="button" class="p-3 rounded-md font-bold bg-red-500 text-white"
+            onclick="removeVisitor()">Restar</button>
+          <button type="button" class="p-3 rounded-md font-bold bg-gray-500 text-white"
+            onclick="resetVisitor()">Reiniciar</button>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="startGame" onclick="playBall()"
+          class="border border-black rounded-md text-2xl p-3 inline-block hover:cursor-pointer disabled:border-gray-300 disabled:text-gray-300 hover:disabled:cursor-default">¡Play
+          ball!</button>
+      </div>
     </div>
-  </div>
 
-  <div class="my-5">
-    <label for="visitor" class="block font-bold text-lg">Visitante</label>
+    <div class="my-5 flex flex-col items-center justify-center">
+      <div class="grid grid-cols-2 w-14 gap-1 rotate-45 mb-4 hidden">
+        <div id=" second-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+        <div id="first-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+        <div id="third-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
+        <div></div>
+      </div>
 
-    <div class="flex items-center">
-      <input type="text" name="visitor" id="visitor" class="text-2xl border border-gray-500 rounded-md p-3 read-only:outline-none">
-      <span id="visitor-total-score" class="font-bold text-4xl mx-4">
-        <span class="block w-6 h-6 animate-pulse bg-blue-300 rounded-full"></span>
-      </span>
-    </div>
-  </div>
+      <div class="flex gap-2 items-center">
+        <span id="top" class="w-0 h-0 
+      border-l-[20px] border-l-transparent
+      border-b-[25px] border-b-red-500
+      border-r-[20px] border-r-transparent"></span>
+        <span id="middle" class="hidden w-0 h-0 
+      border-t-[20px] border-t-transparent
+      border-l-[25px] border-l-red-500
+      border-b-[20px] border-b-transparent"></span>
+        <span id="bottom" class="hidden w-0 h-0 
+      border-l-[20px] border-l-transparent
+      border-t-[25px] border-t-red-500
+      border-r-[20px] border-r-transparent"></span>
+        <span id="inning-number" class="text-4xl">1</span>
+      </div>
 
-  <div>
-    <button type="button" id="startGame" onclick="playBall()" class="border border-black rounded-md text-2xl p-3 inline-block hover:cursor-pointer disabled:border-gray-300 disabled:text-gray-300 hover:disabled:cursor-default">¡Play ball!</button>
-  </div>
-
-  <div class="my-5 hidden">
-    <div class="grid grid-cols-2 w-14 gap-1 rotate-45 mb-4">
-      <div id="second-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
-      <div id="first-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
-      <div id="third-base" class="bg-gray-500 w-6 h-6"></div> <!-- bg-yellow-300 -->
-      <div></div>
-    </div>
-
-    <div class="flex gap-2 items-center">
-      <span class="w-0 h-0 
-      border-l-[10px] border-l-transparent
-      border-b-[15px] border-b-red-500
-      border-r-[10px] border-r-transparent"></span>
-      <span class="w-0 h-0 
-      border-l-[10px] border-l-transparent
-      border-t-[15px] border-t-red-500
-      border-r-[10px] border-r-transparent"></span>
-      <span class="text-lg">1</span>
+      <div class="mt-4">
+        <button type="button" class="bg-red-500 p-3 font-bold rounded-md text-white"
+          onclick="prevInning()">Volver</button>
+        <button type="button" class="bg-green-500 p-3 font-bold rounded-md text-white"
+          onclick="nextInning()">Siguiente</button>
+        <button type="button" class="bg-gray-500 p-3 font-bold rounded-md text-white"
+          onclick="resetInning()">Reiniciar</button>
+      </div>
     </div>
   </div>
 
@@ -81,7 +122,7 @@
           <th>9</th>
         </tr>
       </thead>
-        
+
       <tbody>
         <tr>
           <td id="home-scoreboard-name" class="font-bold text-lg"></td>
@@ -112,59 +153,8 @@
   </div>
 
   <script src="./team.js"></script>
+  <script src="./game.js"></script>
   <script src="./index.js"></script>
-  <script>
-
-    const homeName = document.getElementById("home");
-    const visitorName = document.getElementById("visitor");
-
-    const homeTotalScore = document.getElementById("home-total-score");
-    const visitorTotalScore = document.getElementById("visitor-total-score");
-
-    let homeScore = 0;
-    let visitorScore = 0;
-
-    function playBall() {
-      localStorage.setItem("home", homeName.value);
-      localStorage.setItem("visitor", visitorName.value);
-
-      homeName.readOnly = true;
-      homeName.ariaReadOnly = true;
-
-      visitorName.readOnly = true;
-      visitorName.ariaReadOnly = true;
-
-      document.getElementById("startGame").disabled = true;
-
-      initScoreboard(homeName.value, visitorName.value);
-    }
-
-    function initScoreboard(homeName, visitorName) {
-      const homescoreboardScoreboardName = document.getElementById("home-scoreboard-name");
-      const visitorScoreboardName = document.getElementById("visitor-scoreboard-name");
-
-      homescoreboardScoreboardName.innerHTML = homeName;
-      visitorScoreboardName.innerHTML = visitorName;
-
-      document.getElementById("scoreboard").classList.remove('hidden');
-    }
-
-    window.onload = function() {
-      const homeNameStorage = localStorage.getItem("home");
-      const visitorNameStorage = localStorage.getItem("visitor");
-
-      homeName.value = homeNameStorage;
-      visitorName.value = visitorNameStorage;
-
-      const recoverScoreHome = localStorage.getItem("home-score");
-      const recoverScoreVisitor = localStorage.getItem("visitor-score");
-
-      homeScore = recoverScoreHome;
-      visitorScore = recoverScoreVisitor;
-
-      homeTotalScore.innerHTML = homeScore ?? 0;
-      visitorTotalScore.innerHTML = visitorScore ?? 0;
-    }
-  </script>
 </body>
+
 </html>
