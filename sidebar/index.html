@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <main>
+    <aside id="aside" class="open">
+      <nav>
+        <a href=""><span>📲</span><span class="link-text">option 1</span></a>
+        <a href=""><span>✅</span><span class="link-text">option 2</span></a>
+        <a href=""><span>😁</span><span class="link-text">option 3</span></a>
+        <a href=""><span>🤙</span><span class="link-text">option 4</span></a>
+        <a href=""><span>🎈</span><span class="link-text">option 5</span></a>
+      </nav>
+
+      <button type="button" onclick="toggleMenu()">
+        <span class="open-menu-icons">=></span>
+        <span class="close-menu-icons">
+          <= </span>
+      </button>
+    </aside>
+
+    <section></section>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("aside").classList.toggle("open");
+    }
+  </script>
+</body>
+
+</html>
