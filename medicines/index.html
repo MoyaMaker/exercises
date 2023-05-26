@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de medicamentos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Medicinas</h1>
+
+  <form id="medicine-form" class="medicine-form">
+    <fieldset>
+      <label for="medicine-name">Nombre medicina</label>
+      <input type="text" id="medicine-name" name="medicine-name">
+    </fieldset>
+
+    <fieldset>
+      <label for="medicine-expire-date">Fecha de expiración</label>
+      <input type="date" id="medicine-expire-date" name="medicine-expire-date" tabindex="0">
+    </fieldset>
+
+    <input type="hidden" id="medicine-id" name="medicine-id">
+
+    <button type="submit">Añadir</button>
+  </form>
+
+  <div class="table-container">
+    <table class="table-medicines">
+      <thead>
+        <tr>
+          <th>⚙️</th>
+          <th>Nombre</th>
+          <th>Fecha de vencimiento</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="medicines-list">
+      </tbody>
+    </table>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
