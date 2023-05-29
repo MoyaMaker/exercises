@@ -1,0 +1,21 @@
+.search {
+  display: flex;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+
+  background-color: white;
+}
+
+.search .search__label {
+  display: block;
+}
+
+.search .search__input {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+
+  outline: none;
+}
