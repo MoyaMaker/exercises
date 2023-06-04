@@ -5,7 +5,7 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
 
-  background-color: white;
+  background-color: rgba(225, 241, 255, 0.25);
 }
 
 .search .search__label {
@@ -18,4 +18,11 @@
   padding: 0;
 
   outline: none;
+
+  background-color: transparent;
+  color: white;
+}
+
+.search .search__input::placeholder {
+  color: white;
 }

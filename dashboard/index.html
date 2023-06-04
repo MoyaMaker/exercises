@@ -15,12 +15,13 @@
 <body>
   <div class="main-container">
     <aside class="sidebar">
-      <header>
+      <header class="sidebar__header">
         <h2>Acme Corp</h2>
 
         <label for="search" class="search">
           <span class="search__label">🔍</span>
-          <input type="search" name="search" id="search" autocomplete="false" class="search__input">
+          <input type="search" name="search" id="search" autocomplete="false" class="search__input"
+            placeholder="Search">
         </label>
       </header>
 
@@ -51,8 +52,8 @@
         </a>
       </nav>
 
-      <footer>
-        <section>
+      <footer class="sidebar__footer">
+        <section class="options">
           <a href="">
             <span>🏠</span>
             <span>Dashboard</span>
@@ -65,14 +66,25 @@
 
         <hr>
 
-        <section>
-          <span>James Smith</span>
-          <span>
-            james@acme.co
-          </span>
+        <section class="profile">
+          <div class="profile__image">
+          </div>
+          <div class="profile__user">
+            <span>James Smith</span>
+            <span>
+              james@acme.co
+            </span>
+          </div>
         </section>
       </footer>
     </aside>
+
+    <main class="content">
+      <h1>Welcome back, James</h1>
+      <p>Build and publish your tests in no time.</p>
+
+      <hr>
+    </main>
   </div>
 </body>
 
